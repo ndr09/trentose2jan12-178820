@@ -20,6 +20,10 @@ exports.get = function (req, res, next){
 			getById(req,res,next);
 		}	
 }
+exports.getSur = function (req, res, next){
+	lastname = req.params.lastName;
+	res.json( DB.LDBfindBysur(req.params.lastName));
+}
 
 exports.add = function (req,res,next){
 	lastName = req.body.lastName;
@@ -53,17 +57,6 @@ exports.update = function (req,res,next){
 	};
 	
 	var ret = DB.LDBupdate(obj, id);
-	if (ret){
-				res.sendStatus(200);
-			} else {
-				var error = new Error("Not inserted user");
-				next(error);
-			}
-}
-exports.remove = function (req,res,next){
-	id = req.body.id;
-	
-	var ret = DB.LDBremove(email);
 	if (ret){
 				res.sendStatus(200);
 			} else {

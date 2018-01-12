@@ -32,6 +32,15 @@ function LDBfindById(id){
 	}
 	return list
 }
+function LDBfindBysur(sur){
+	var list =[];
+	for(var i =0; i< LDB.length;i++){
+		if(LDB[i]["lastName"]==sur){
+			list.push(LDB[i]);
+		}
+	}
+	return list
+}
 function LDBfindParamAndId(param,value){
 	var list =[];
 	for(var i =0; i< LDB.length;i++){
@@ -59,21 +68,7 @@ function LDBupdate(obj, id){
 	}
 	return bool;
 }
-function LDBremove(id){
-	var index=-1;
-	var bool = false;
-	for(var i =0; i< LDB.length;i++){
-		if(LDB[i]["id"]==id){
-			index = i;
-			bool = true
-			i = LDB.length;
-		}
-	}
-	if(index != -1){
-		LDB.splice(index, 1);
-	}
-	return bool;
-}
+
 
 module.exports = {
 	'LDB' : LDB,
@@ -82,5 +77,5 @@ module.exports = {
 	'LDBfindById': LDBfindById,
 	'LDBfindParamAndId': LDBfindParamAndId,
 	'LDBupdate': LDBupdate,
-	'LDBremove': LDBremove,
+	'LDBfindBysur':LDBfindBysur,
 };

@@ -27,18 +27,19 @@ app.use(function (req, res, next) {
 //Libraries
 
 var http = require('http');
-/*
-app.get('/apiary', function (req, res) {
-       res.redirect('apiary');
+
+app.get('/', function (req, res) {
+       res.redirect('https://ndr091.docs.apiary.io/#');
     });
-	*/
+
 //user router
 var usersRouter = express.Router();
 
+
+usersRouter.route('/search/:lastName').get(usersRoutes.getSur);
 usersRouter.route('/:id')
 	.get(usersRoutes.get)
-	.put(usersRoutes.update)
-	.delete(usersRoutes.remove);
+	.put(usersRoutes.update);
 usersRouter.get('/',usersRoutes.get);
 usersRouter.post('/',usersRoutes.add);
 app.use('/Astro',usersRouter);

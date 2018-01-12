@@ -1,0 +1,25 @@
+{
+  "name": "trentose2jan12-178820",
+  "version": "1.0.0",
+  "description": "esame testo A",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndr09/trentose2jan12-178820.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ndr09/trentose2jan12-178820/issues"
+  },
+  "homepage": "https://github.com/ndr09/trentose2jan12-178820#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.9",
+    "request": "^2.83.0"
+  }
+}

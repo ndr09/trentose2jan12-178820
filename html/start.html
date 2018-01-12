@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+    <title>Fetch API Demo</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="https://v40.pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> 
+<script >
+addUser = function (){
+
+    var Email = document.getElementById('addEmail').value;
+
+    var name = document.getElementById('addName').value;
+
+    var surname = document.getElementById('addSurname').value;
+	
+    fetch("https://esame-is2-178820.herokuapp.com/users/", {
+
+              method: "POST",
+
+              mode : 'cors',
+
+              headers: {
+
+                Accept: "application/json",
+
+                "Content-Type": "application/json"
+
+              },
+
+              body: JSON.stringify({
+				
+				email: Email,
+
+                name: name,
+
+                surname: surname,
+
+              })
+
+            }).then((response) => {
+					if(response.status == 200){
+						if(confirm('Aggiunto')){
+							window.location.reload();  
+						}else
+							window.location.reload(); 
+					}else{
+						if(confirm('Errore')){
+							window.location.reload();  
+						}
+					}
+                });
+
+}
+updateUser = function (){
+    var oldEmail = document.getElementById('oldEmail').value;
+
+    var newEmail = document.getElementById('newEmail').value;
+
+    var name = document.getElementById('name').value;
+
+    var surname = document.getElementById('surname').value;
+	
+    fetch("https://esame-is2-178820.herokuapp.com/users/", {
+
+              method: "PUT",
+
+              mode : 'cors',
+
+              headers: {
+
+                Accept: "application/json",
+
+                "Content-Type": "application/json"
+
+              },
+
+              body: JSON.stringify({
+				
+				newEmail: newEmail,
+				
+                oldEmail: oldEmail,
+
+                name: name,
+
+                surname: surname,
+
+              })
+
+            }).then((response) => {
+					if(response.status == 200){
+						if(confirm('Aggiornato')){
+							window.location.reload();  
+						}else
+							window.location.reload(); 
+					}else{
+						if(confirm('Errore')){
+							window.location.reload();  
+						}
+					}
+                });
+
+}
+deleteUser = function (){
+    var Email = document.getElementById('delEmail').value;
+	
+	
+    fetch("https://esame-is2-178820.herokuapp.com/users/", {
+
+              method: "DELETE",
+
+              mode : 'cors',
+
+              headers: {
+
+                Accept: "application/json",
+
+                "Content-Type": "application/json"
+
+              },
+
+              body: JSON.stringify({
+				
+				email: Email
+
+              })
+
+            }).then((response) => {
+					
+                  if(response.status == 200){
+						if(confirm('Eliminato')){
+							window.location.reload();  
+						}else
+							window.location.reload(); 
+					}else{
+						if(confirm('Errore')){
+							window.location.reload();  
+						}
+					}
+
+                });
+
+}
+
+
+</script>
+</head>
+
+<body>
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-3">
+  <fieldset>
+    <legend>Add user:</legend>
+	email:<br>
+	<input type="text" id="addEmail" name="email" value="mariorossi@email.it" class="form-control"><br>
+    First name:<br>
+    <input type="text" id="addName" name="name" value="Mickey" class="form-control"><br>
+    Last name:<br>
+    <input type="text" id="addSurname" name="surname" value="Mouse" class="form-control"><br><br>
+	
+    <button onclick="addUser()" type="submit" value="Submit" class="btn btn-success">Aggiungi</button>
+  </fieldset>
+</div>
+<div class="col-md-4">
+  <fieldset>
+    <legend>update user leave empty if not change:</legend>
+	old email:<br>
+	<input id="oldEmail" type="text" name="oldEmail" value="" class="form-control"><br>
+	new email:<br>
+	<input id="newEmail" type="text" name="newEmail" value="" class="form-control"><br>
+    First name:<br>
+    <input id="name" type="text" name="name" value="" class="form-control"><br>
+    Last name:<br>
+    <input id="surname" type="text" name="surname" value="" class="form-control"><br><br>
+	<button onclick="updateUser()" class="btn btn-primary">Modifica</button>
+  </fieldset>
+</div>
+<div class="col-md-3">
+  <fieldset>
+    <legend>delete user by email:</legend>
+	email:<br>
+	<input id="delEmail" type="text" name="delEmail" value="" class="form-control"><br><br>
+	<button onclick="deleteUser()" class="btn btn-danger">Elimina</button>
+  </fieldset>
+</div>
+<div class="col-md-1"></div>
+</div>
+    <h1>List of users</h1>
+
+    <ul id="authors"></ul>
+
+    
+
+    <script type="text/javascript">
+			
+
+
+        const ul = document.getElementById('authors'); // Get the list where we will place our authors
+
+        const url = '/users/'; // Get 10 random users        
+
+        fetch(url)
+
+            .then((resp) => resp.json()) // Transform the data into json
+
+            .then(function(data) {
+
+                // Here you get the data to modify as you please
+
+                let authors = data // Get the results
+
+                return authors.map(function(author) { // Map through the results and for each run the code below
+
+                    let li = document.createElement('li'); //  Create the elements we need
+
+                    //let img = document.createElement('img');
+
+                    let span = document.createElement('span');
+
+                    //img.src = author.picture.medium;  // Add the source of the image to be the src of the img element
+
+                    span.innerHTML = `${author.email} ${author.name} ${author.surname}`; // Make the HTML of our span to be the first and last name of our author
+
+                    // Append all our elements
+
+                    //li.appendChild(img);
+
+                    li.appendChild(span);
+
+                    ul.appendChild(li);
+
+                })
+
+            })
+
+            .catch( error => console.error(error) );// If there is any error you will catch them here
+	
+
+
+    </script>
+
+    
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+ 
+</body>
+
+</html>

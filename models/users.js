@@ -26,8 +26,9 @@ function LDBfind(obj){
 function LDBfindById(id){
 	var list =[];
 	for(var i =0; i< LDB.length;i++){
-		if(LDB[i]["id"]==id)
-		list.push(LDB[i]);
+		if(LDB[i]["id"]==id){
+			list.push(LDB[i]);
+		}
 	}
 	return list
 }

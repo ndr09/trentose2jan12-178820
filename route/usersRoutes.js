@@ -45,7 +45,7 @@ exports.update = function (req,res,next){
 	lastName = req.body.lastName;
 	firstName = req.body.firstName;
 	isInspace = req.body.isInspace;
-	id = req.body.id;
+	id = req.params.id;
 	var obj = {
 		"lastName":lastName,
 		"firstName":firstName,

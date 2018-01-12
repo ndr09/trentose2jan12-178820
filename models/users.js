@@ -45,13 +45,13 @@ function LDBupdate(obj, id){
 	for(var i =0; i< LDB.length;i++){
 
 		if(LDB[i]["id"]==id){
-			if(obj.email){
+			if(obj.firstName){
 				LDB[i]["firstName"] = obj.firstName;
 			}
-			if(obj.name){
+			if(obj.lastName){
 				LDB[i]["lastName"] = obj.lastName;
 			}
-			if(obj.surname){
+			if(obj.isInspace){
 				LDB[i]["isInspace"] = obj.isInspace;
 			}
 			bool = true;

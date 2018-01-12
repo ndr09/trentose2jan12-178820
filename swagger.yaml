@@ -74,14 +74,16 @@ paths:
                 description: error
                 schema:
                   $ref: '#/definitions/errorSchema'
-  /Astro/search:
+  /Astro/search/{lastName}:
     get:
         description: get astro by surname
         parameters: 
           - name: lastName
-            in: query 
-            description: lastname to search
+            in: path
+            description: lastNAme of the astronaut
+            required: true
             type: string
+
         responses:
               200:
                  description: get a astro 

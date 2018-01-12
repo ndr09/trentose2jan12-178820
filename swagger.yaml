@@ -74,8 +74,25 @@ paths:
                 description: error
                 schema:
                   $ref: '#/definitions/errorSchema'
+  /Astro/search:
+    get:
+        description: Insert new Astronauts
+        parameters: 
+          - name: lastName
+            in: query 
+            description: lastname to search
+            type: string
+        responses:
+              200:
+                 description: get a astro 
+                 schema:
+                    $ref: '#/definitions/astro'
+              500:
+                description: error
+                schema:
+                  $ref: '#/definitions/errorSchema'
 
-              
+            
 definitions:
 
   astro:

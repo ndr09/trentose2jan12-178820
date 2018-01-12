@@ -27,21 +27,6 @@ app.use(function (req, res, next) {
 //Libraries
 
 var http = require('http');
-
- 
-
-
-
-
-
-app.get('/', function (req, res) {
-        fs.readFile('./html/start.html', function(err, data) {
-		res.writeHead(200, {'Content-Type': 'text/html'});
-		res.write(data);
-		res.end();
-		});
-        //res.redirect('./html/start.html');
-    });
 /*
 app.get('/apiary', function (req, res) {
        res.redirect('apiary');
@@ -49,13 +34,13 @@ app.get('/apiary', function (req, res) {
 	*/
 //user router
 var usersRouter = express.Router();
-usersRouter.get('/',usersRoutes.get);
-usersRouter.post('/',usersRoutes.add);
-/*usersRouter.route('/:id')
-	.get(usersRoutes.getID)
+
+usersRouter.route('/:id')
+	.get(usersRoutes.get)
 	.put(usersRoutes.update)
 	.delete(usersRoutes.remove);
-*/
+usersRouter.get('/',usersRoutes.get);
+usersRouter.post('/',usersRoutes.add);
 app.use('/Astro',usersRouter);
 
 // handle invalid requests and internal error

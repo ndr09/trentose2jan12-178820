@@ -6,24 +6,19 @@ function getAll(re,res,next){
 }
 
 function getById(req,res,next){
-	res.json( DB.LDBfindById(req.params.Id));
+	res.json( DB.LDBfindById(req.params.id));
 }
 function getByPar(req,res,next){
 	
 	res.json( DB.LDBfindParamAndId(req.params.par,req.params.Id));
 }
 exports.get = function (req, res, next){
-	getAll(req,res,next);
-/*	if(!Id && !Params){		
+	id = req.params.id;
+	if(!id){		
 		getAll(req,res,next);
 	} else {
-		if(Id){
-			if(!Params){
-				getById(req,res,next);
-			} else 
-			getByPar(req,res,next);
+			getById(req,res,next);
 		}	
-	}*/
 }
 
 exports.add = function (req,res,next){

@@ -3,11 +3,11 @@ var Schema = mongoose.Schema;
 var LDB = [];
 
 function LDBput(obj){
-	var email = obj.email;
+	var id = obj.id;
 	var bool = true;
 	for(var i =0; i< LDB.length;i++){
 
-		if(LDB[i]["email"]==email){
+		if(LDB[i]["id"]==id){
 			bool = false;
 		}
 	}
@@ -26,7 +26,7 @@ function LDBfind(obj){
 function LDBfindById(id){
 	var list =[];
 	for(var i =0; i< LDB.length;i++){
-		if(LDB[i]["email"]==id)
+		if(LDB[i]["id"]==id)
 		list.push(LDB[i]);
 	}
 	return list
@@ -39,30 +39,30 @@ function LDBfindParamAndId(param,value){
 	}
 	return list
 }
-function LDBupdate(obj, email){
+function LDBupdate(obj, id){
 	var bool = false;
 	for(var i =0; i< LDB.length;i++){
 
-		if(LDB[i]["email"]==email){
+		if(LDB[i]["id"]==id){
 			if(obj.email){
-				LDB[i]["email"] = obj.email;
+				LDB[i]["firstName"] = obj.firstName;
 			}
 			if(obj.name){
-				LDB[i]["name"] = obj.name;
+				LDB[i]["lastName"] = obj.lastName;
 			}
 			if(obj.surname){
-				LDB[i]["surname"] = obj.surname;
+				LDB[i]["isInspace"] = obj.isInspace;
 			}
 			bool = true;
 		}
 	}
 	return bool;
 }
-function LDBremove(email){
+function LDBremove(id){
 	var index=-1;
 	var bool = false;
 	for(var i =0; i< LDB.length;i++){
-		if(LDB[i]["email"]==email){
+		if(LDB[i]["id"]==id){
 			index = i;
 			bool = true
 			i = LDB.length;

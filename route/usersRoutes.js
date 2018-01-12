@@ -13,10 +13,8 @@ function getByPar(req,res,next){
 	res.json( DB.LDBfindParamAndId(req.params.par,req.params.Id));
 }
 exports.get = function (req, res, next){
-	var Id = req.query.Id;
-	var Params = req.query.par;
-	
-	if(!Id && !Params){		
+	getAll(req,res,next);
+/*	if(!Id && !Params){		
 		getAll(req,res,next);
 	} else {
 		if(Id){
@@ -25,18 +23,19 @@ exports.get = function (req, res, next){
 			} else 
 			getByPar(req,res,next);
 		}	
-	}
+	}*/
 }
 
 exports.add = function (req,res,next){
-	email = req.body.email;
-	name = req.body.name;
-	surname = req.body.surname;
+	lastName = req.body.lastName;
+	firstName = req.body.firstName;
+	isInspace = req.body.isInSpace;
 	
 	var obj = {
-		"email":email,
-		"name":name,
-		"surname":surname,
+		"id": DB.LDB.length,
+		"lastName":lastName,
+		"firstName":firstName,
+		"isInspace":isInspace,
 	};
 	
 	var ret = DB.LDBput(obj);
@@ -48,17 +47,17 @@ exports.add = function (req,res,next){
 			}
 }
 exports.update = function (req,res,next){
-	email = req.body.newEmail;
-	name = req.body.name;
-	surname = req.body.surname;
-	oldEmail = req.body.oldEmail;
+	lastName = req.body.lastName;
+	firstName = req.body.firstName;
+	isInspace = req.body.isInspace;
+	id = req.body.id;
 	var obj = {
-		"email":email,
-		"name":name,
-		"surname":surname,
+		"lastName":lastName,
+		"firstName":firstName,
+		"isInspace":isInspace,
 	};
 	
-	var ret = DB.LDBupdate(obj, oldEmail);
+	var ret = DB.LDBupdate(obj, id);
 	if (ret){
 				res.sendStatus(200);
 			} else {
@@ -67,7 +66,7 @@ exports.update = function (req,res,next){
 			}
 }
 exports.remove = function (req,res,next){
-	email = req.body.email;
+	id = req.body.id;
 	
 	var ret = DB.LDBremove(email);
 	if (ret){

@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const fs = require('fs');
-const mongoose = require('mongoose');
 const qs = require('querystring');
 const usersRoutes = require('./route/usersRoutes.js');
 
@@ -50,13 +49,14 @@ app.get('/apiary', function (req, res) {
 	*/
 //user router
 var usersRouter = express.Router();
-usersRouter.route('/')
-	.get(usersRoutes.get)
-	.post(usersRoutes.add)
+usersRouter.get('/',usersRoutes.get);
+usersRouter.post('/',usersRoutes.add);
+/*usersRouter.route('/:id')
+	.get(usersRoutes.getID)
 	.put(usersRoutes.update)
 	.delete(usersRoutes.remove);
-
-app.use('/users',usersRouter);
+*/
+app.use('/Astro',usersRouter);
 
 // handle invalid requests and internal error
 app.use((req, res, next) => {

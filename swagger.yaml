@@ -76,7 +76,7 @@ paths:
                   $ref: '#/definitions/errorSchema'
   /Astro/search:
     get:
-        description: Insert new Astronauts
+        description: get astro by surname
         parameters: 
           - name: lastName
             in: query 

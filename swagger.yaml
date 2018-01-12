@@ -1,0 +1,132 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: "Astro APIs"
+  description: "Astro REST APIs allow to retrieve, provide and manage informations about astronauts." 
+  contact:
+    name: "Andrea Ferigo"
+    email: "andrea.ferigo@tudenti.unitn"
+host: trentose2jan12-178820.herokuapp.com
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/x-www-form-urlencoded
+produces:
+  - application/json
+paths:
+
+  /Astro/{id}:
+    get:
+      description: |
+        Returns an object containing the data about astronaut.
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+      responses:
+        200:
+          description: get a astro 
+          schema:
+            $ref: '#/definitions/astro'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorSchema'
+    put:
+      description:
+        'Updates astronaut info.'
+      parameters:
+        - name: id
+          in: path
+          description: id of the astronaut
+          required: true
+          type: string
+        - name: lastDept
+          in: body
+          description: new data of astronaut
+          required: true
+          schema: 
+            $ref: '#/definitions/astroUp'
+      responses:
+        200:
+            description: ok
+        500:
+          description: error
+          schema:
+            $ref: '#/definitions/errorSchema'
+  /Astro:
+    post:
+        description: Insert new Astronauts
+        parameters: 
+          - name: astro
+            in: body
+            description: astro attributes
+            required: true
+            schema:
+              $ref: '#/definitions/userInsert'
+        responses:
+              200:
+                description: ok
+              500:
+                description: error
+                schema:
+                  $ref: '#/definitions/errorSchema'
+
+              
+definitions:
+
+  astro:
+      required:
+        - firstName
+        - lastName
+        - isInSpace
+        - id
+      properties:
+        firstName:
+          type: string
+        lastName: 
+          type: string
+        id: 
+          type: string
+        isInSpace:
+          type: boolean
+        
+  userInsert:
+    required:
+      - firstName
+      - lastName
+      - isInSpace
+    properties:
+      firstName:
+        type: string
+      lastName: 
+        type: string
+      isInSpace:
+        type: boolean
+        
+        
+  astroUp:
+     properties:
+        firstName:
+          type: string
+        lastName: 
+          type: string
+        id: 
+          type: string
+        isInSpace:
+          type: boolean
+
+    
+  errorSchema:
+    required:
+      - error
+    properties:
+      error:
+        required:
+          - message
+        properties:
+          message:
+            type: string
